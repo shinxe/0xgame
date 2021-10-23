@@ -5,8 +5,7 @@ char game_dis[3][3] = {
 {'4', '5', '6'},
 {'7', '8', '9'},
 };
-int input_num = 0;
-int loop = 0;
+int input_num;
 char player = 'X';
 
 void Dis_draw() {
@@ -27,13 +26,14 @@ void Change_Player() {
 	}
 }
 
-char Check_Win() {
-	if (game_dis[0][0] == 'X' && game_dis[0][1] == 'X' && game_dis[0][2] == 'X') {
-		return 'X';
-	}
-}
-		
+/*1 2 3
+* 4 5 6
+* 7 8 9*/
+
 void Input() {
+	std::cout << "Where do you want to change : ";
+	std::cin >> input_num;
+
 	switch (input_num) {
 	case 1:
 		game_dis[0][0] = player;
@@ -67,14 +67,69 @@ void Input() {
 	}
 }
 
+char Check_Win() {
+	//beside
+	if (game_dis[0][0] == 'X' && game_dis[1][0] == 'X' && game_dis[2][0] == 'X')
+		return 'X';
+	if (game_dis[1][0] == 'X' && game_dis[1][1] == 'X' && game_dis[1][2] == 'X') 
+		return 'X';
+	if (game_dis[2][0] == 'X' && game_dis[2][1] == 'X' && game_dis[2][2] == 'X') 
+		return 'X';
+	//vertical
+	if (game_dis[0][0] == 'X' && game_dis[0][1] == 'X' && game_dis[0][2] == 'X') 
+		return 'X';
+	if (game_dis[1][0] == 'X' && game_dis[1][1] == 'X' && game_dis[1][2] == 'X') 
+		return 'X';
+	if (game_dis[2][0] == 'X' && game_dis[2][1] == 'X' && game_dis[2][2] == 'X') 
+		return 'X';
+	
+	//diagonal
+	if (game_dis[0][0] == 'X' && game_dis[1][1] == 'X' && game_dis[2][2] == 'X') 
+		return 'X';
+	if (game_dis[0][2] == 'X' && game_dis[1][1] == 'X' && game_dis[2][0] == 'X') 
+		return 'X';
+	
+
+	//O beside
+	if (game_dis[0][0] == 'O' && game_dis[1][0] == 'O' && game_dis[2][0] == 'O') 
+		return 'O';
+	if (game_dis[0][1] == 'O' && game_dis[1][1] == 'O' && game_dis[2][1] == 'O') 
+		return 'O';
+	if (game_dis[0][2] == 'O' && game_dis[1][2] == 'O' && game_dis[2][2] == 'O') 
+		return 'O';
+	
+	//vertical
+	if (game_dis[0][0] == 'O' && game_dis[0][1] == 'O' && game_dis[0][2] == 'O') 
+		return 'O';
+	if (game_dis[1][0] == 'O' && game_dis[1][1] == 'O' && game_dis[1][2] == 'O') 
+		return 'O';
+	if (game_dis[2][0] == 'O' && game_dis[2][1] == 'O' && game_dis[2][2] == 'O') 
+		return 'O';
+	
+	//diagonal
+	if (game_dis[0][0] == 'O' && game_dis[1][1] == 'O' && game_dis[2][2] == 'O') 
+		return 'O';
+	if (game_dis[0][2] == 'O' && game_dis[1][1] == 'O' && game_dis[2][0] == 'O') 
+		return 'O';
+
+	return 'N';
+}
+
 int main() {
-	while (loop < 5) {
-		Dis_draw();
-		std::cout << "Where do you want to change : " << std::endl;
-		std::cin >> input_num;
+	Dis_draw();
+	while (1) {
+		std::cout << std::endl;
 		Input();
+		Dis_draw();
+		if (Check_Win() == 'X') {
+			std::cout << "X wins" << std::endl;
+			break;
+		}
+		else if (Check_Win() == 'O') {
+			std::cout << "O wins" << std::endl;
+			break;
+		}
 		Change_Player();
-		loop++;
 	}
 	return 0;
 }
