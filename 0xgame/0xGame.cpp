@@ -27,9 +27,12 @@ void Change_Player() {
 	}
 }
 
-
-void Check_Win(){
-	if (game_dis[0][0]
+char Check_Win() {
+	if (game_dis[0][0] == 'X' && game_dis[0][1] == 'X' && game_dis[0][2] == 'X') {
+		return 'X';
+	}
+}
+		
 void Input() {
 	switch (input_num) {
 	case 1:
