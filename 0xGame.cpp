@@ -122,11 +122,11 @@ int main() {
 		Input();
 		Dis_draw();
 		if (Check_Win() == 'X') {
-			std::cout << "X wins" << std::endl;
+			std::cout << std::endl << "X wins" << std::endl;
 			break;
 		}
 		else if (Check_Win() == 'O') {
-			std::cout << "O wins" << std::endl;
+			std::cout << std::endl << "O wins" << std::endl;
 			break;
 		}
 		Change_Player();
